@@ -165,17 +165,38 @@ public class GLESProgramFactory {
             }
 
             if(!hasColor(attributes) && hasTexture(attributes)) {
-                builder.append("  gl_FragColor = ");
+                StringBuilder declares = new StringBuilder();
+                declares.append("  vec4 ");
+                StringBuilder loads = new StringBuilder();
+                StringBuilder combines = new StringBuilder();
+                combines.append("  gl_FragColor = ");
 
                 for(int idx = 1; idx <= numTextures; idx++) {
                     if(idx != 1) {
-                        builder.append(" * ");
+                        declares.append(",");
+                        combines.append(" * ");
                     }
-                    builder.append("textureColor");
-                    builder.append(idx);
-                }
-                builder.append(";");
 
+                    declares.append("textureColor");
+                    declares.append(idx);
+
+                    loads.append("  textureColor");
+                    loads.append(idx);
+                    loads.append(" = texture2D(uSampler");
+                    loads.append(idx);
+                    loads.append(",vCoord");
+                    loads.append(idx);
+                    loads.append(");");
+
+                    combines.append("textureColor");
+                    combines.append(idx);
+                }
+                declares.append(";");
+                combines.append(";");
+
+                builder.append(declares);
+                builder.append(loads);
+                builder.append(combines);
 
                 //builder.append("  gl_FragColor = texture2D(uSampler,vCoord);");
             }

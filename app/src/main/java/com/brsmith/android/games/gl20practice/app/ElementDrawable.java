@@ -63,14 +63,14 @@ public class ElementDrawable {
     public void setWidth(int width) { lineWidth = width; }
 
     public void draw() {
-        GLESProgram program = GLESProgramPool.getProgram(attribs);
+        GLESProgram program = GLESProgramPool.getProgram(attribs,textures.size());
         GLES20.glUseProgram(program.getProgramId());
 
         if(attribs.contains(GLESProgram.Attributes.TEXTURE)) {
             int idx = 0;
             for(Texture texture : textures) {
-                program.attachTexture("uSampler" + idx, texture);
                 idx++;
+                program.attachTexture("uSampler" + idx, texture);
             }
         }
 
@@ -82,8 +82,8 @@ public class ElementDrawable {
         if(attribs.contains(GLESProgram.Attributes.TEXTURE)) {
             int idx = 0;
             for(GLESBuffer buffer : bufferTexCoords) {
-                program.attachAttribute("aCoord" + idx, buffer);
                 idx++;
+                program.attachAttribute("aCoord" + idx, buffer);
             }
         }
 

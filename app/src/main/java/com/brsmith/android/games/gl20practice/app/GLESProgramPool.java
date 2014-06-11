@@ -42,7 +42,7 @@ public class GLESProgramPool {
         String key = builder.toString();
 
         if(!pool.containsKey(key)) {
-            GLESProgram program = GLESProgramFactory.generateProgram(attributes);
+            GLESProgram program = GLESProgramFactory.generateProgram(attributes, numTextures);
             pool.put(key, program);
         }
 

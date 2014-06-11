@@ -69,10 +69,17 @@ public class GLES20Renderer2 implements GLSurfaceView.Renderer {
                         //0.25f,0.25f, 0.75f,0.25f, 0.75f,0.75f, 0.25f,0.75f
                         //0,1, 1,1, 1,0, 0,0
                 }, 2);
-        Texture texture = new Texture(context, R.drawable.brick);
-        TextureRegion region = new TextureRegion(texture, 0, 0, texture.width, texture.height);
+        //Texture texture = new Texture(context, R.drawable.brick);
+        //TextureRegion region = new TextureRegion(texture, 0, 0, texture.width, texture.height);
         //filledRect.setTexture(texture, buffer);
-        filledRect.setTexture(region);
+        //filledRect.setTexture(region);
+
+        Texture texture1 = new Texture(context, R.drawable.texture1);
+        TextureRegion region1 = new TextureRegion(texture1, 0, 0, texture1.width, texture1.height);
+        filledRect.addTexture(region1);
+        Texture texture2 = new Texture(context, R.drawable.texture2);
+        TextureRegion region2 = new TextureRegion(texture2, 0, 0, texture2.width, texture2.height);
+        filledRect.addTexture(region2);
 
         buffer = new GLESBuffer(
                 new float[] {
@@ -192,9 +199,9 @@ public class GLES20Renderer2 implements GLSurfaceView.Renderer {
         //singleTriangle4.rotate(0, 0, 45);
         //singleTriangle4.draw(glGraphics);
 
-        rect.draw();
+        //rect.draw();
         filledRect.draw();
-        triangles.draw();
+        //triangles.draw();
         GLES20.glColorMask(true, true, true, true);
     }
 }

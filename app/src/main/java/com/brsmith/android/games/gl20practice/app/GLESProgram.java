@@ -59,6 +59,9 @@ public class GLESProgram {
     }
 
     public void attachAttribute(String attributeName, FloatBuffer buffer, int size) {
+
+        Log.d("Program", "Attribute: " + attributeName);
+
         int attributeLocation = GLES20.glGetAttribLocation(programId, attributeName);
         GLES20.glVertexAttribPointer(attributeLocation, size, GLES20.GL_FLOAT, false, 0, buffer);
         GLES20.glEnableVertexAttribArray(attributeLocation);
