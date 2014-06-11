@@ -46,6 +46,10 @@ public class GLESProgramPool {
             pool.put(key, program);
         }
 
-        return pool.get(key);
+        GLESProgram program = pool.get(key);
+        if(attributes.contains(GLESProgram.Attributes.TEXTURE)) {
+            program.reset();
+        }
+        return program;
     }
 }

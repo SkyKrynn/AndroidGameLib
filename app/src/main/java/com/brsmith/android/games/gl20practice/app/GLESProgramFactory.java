@@ -152,9 +152,6 @@ public class GLESProgramFactory {
                 declares.append(";");
                 combines.append(");");
 
-                //builder.append("  vec4 textureColor;");
-                //builder.append("  textureColor = texture2D(uSampler,vCoord);");
-                //builder.append("  gl_FragColor = vColor + textureColor;");
                 builder.append(declares);
                 builder.append(loads);
                 builder.append(combines);
@@ -197,8 +194,6 @@ public class GLESProgramFactory {
                 builder.append(declares);
                 builder.append(loads);
                 builder.append(combines);
-
-                //builder.append("  gl_FragColor = texture2D(uSampler,vCoord);");
             }
 
         } else {

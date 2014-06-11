@@ -59,9 +59,6 @@ public class GLESProgram {
     }
 
     public void attachAttribute(String attributeName, FloatBuffer buffer, int size) {
-
-        Log.d("Program", "Attribute: " + attributeName);
-
         int attributeLocation = GLES20.glGetAttribLocation(programId, attributeName);
         GLES20.glVertexAttribPointer(attributeLocation, size, GLES20.GL_FLOAT, false, 0, buffer);
         GLES20.glEnableVertexAttribArray(attributeLocation);
@@ -73,20 +70,14 @@ public class GLESProgram {
     }
 
     public void attachTexture(String uniformName, Texture texture) {
-        //GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, _textureId1);
-        //GLES20.glUniform1i(_planeUSampler1Location, 0);
-
-        //GLES20.glActiveTexture(GLES20.GL_TEXTURE1);
-        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, _textureId2);
-        //GLES20.glUniform1i(_planeUSampler2Location, 1);
-
         int uniformLocation = GLES20.glGetUniformLocation(programId, uniformName);
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + nextTexturePosition);
         texture.bind();
-        //GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture.getTextureId());
         GLES20.glUniform1i(uniformLocation, nextTexturePosition);
+        nextTexturePosition++;
     }
+
+    public void reset() { nextTexturePosition = 0; }
 
     public int getProgramId() { return programId; }
 
